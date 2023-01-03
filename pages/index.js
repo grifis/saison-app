@@ -54,8 +54,7 @@ export default function Index({ posts }) {
             <div>
               <h1>POST一覧</h1>
               {posts.data.map((post) => {
-                <TimelineItem post={post} />;
-                return <TimelineItem post={post} />;
+                return <TimelineItem post={post} key={post.id} />;
               })}
             </div>
           </TabPanel>
