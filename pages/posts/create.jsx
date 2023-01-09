@@ -45,7 +45,7 @@ export default function Create() {
         <Head title="イベント企画作成"></Head>
         <div className="w-full max-w-xs mx-auto">
           <div className="relative mb-2">
-            <Link href="/posts" className="absolute">
+            <Link href="/" className="absolute">
               {/* <img
                 src={Arrow}
                 className="bg-white p-1 border border-2 border-gray-900 rounded-full"

@@ -5,8 +5,8 @@ import { Inter } from "@next/font/google";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import clsx from "clsx";
-import TimelineItem from "../../components/TimelineItem";
-import { withAuthServerSideProps } from "../../lib/auth";
+import TimelineItem from "../components/TimelineItem";
+import { withAuthServerSideProps } from "../lib/auth";
 import { blue } from "@mui/material/colors";
 
 const inter = Inter({ subsets: ["latin"] });

@@ -7,7 +7,7 @@ export default function Post(props) {
     <>
       <div className="bg-white py-6 sm:py-8 lg:py-12">
         <div className="relative mb-2">
-          <Link href={"/posts"} className="text-blue-600 absolute">
+          <Link href={"/"} className="text-blue-600 absolute">
             <p>戻る</p>
             {/* <img
               src={Arrow}
