@@ -3,16 +3,43 @@ import Image from "next/image";
 import { BsFillBellFill } from "react-icons/bs";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
+import { isAuth } from "../lib/auth";
+import { useEffect, useState } from "react";
 
 export default function Header() {
-  const logined = (
+  const [auth, setAuth] = useState("");
+  useEffect(() => {
+    setAuth(isAuth ? "login" : "notLogin");
+  }, []);
+
+  const notLogin = (
+    <>
+      <div className="lg:flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-2.5 -ml-8">
+        <Link
+          href="/login"
+          className="inline-block focus-visible:ring ring-indigo-300 text-gray-500 hover:text-red-500 active:text-indigo-600 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-4 py-3"
+        >
+          ログイン
+        </Link>
+
+        <Link
+          href="/register"
+          className="inline-block bg-red-500 hover:bg-red-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-6 py-3"
+        >
+          登録
+        </Link>
+      </div>
+    </>
+  );
+
+  const login = (
     <>
       <form className="flex-col">
         <div className="block flex gap-3 items-center">
           <Link href="">
             <BsFillBellFill size={20} color={"FB8914"} />
           </Link>
-          <Link href="/create">
+          <Link href="/posts/create">
             <IoMdAddCircleOutline size={25} color={"FB8914"} />
           </Link>
           <Link href={`/users/`}>
@@ -32,8 +59,8 @@ export default function Header() {
       {/* ロゴここまで */}
 
       {/* ボタンここから */}
-      {/* {auth.user || auth.owner ? logined : notLogined} */}
-      {logined}
+      {auth == "login" && login}
+      {auth == "notLogin" && notLogin}
     </header>
   );
 }

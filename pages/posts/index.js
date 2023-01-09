@@ -5,17 +5,26 @@ import { Inter } from "@next/font/google";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import clsx from "clsx";
-import TimelineItem from "../components/TimelineItem";
+import TimelineItem from "../../components/TimelineItem";
+import { withAuthServerSideProps } from "../../lib/auth";
+import { blue } from "@mui/material/colors";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const classes = {
   base: "text-gray-600 py-2 px-4 block focus:outline-none font-medium w-1/2",
   selected: "border-t-4",
+  timeline: "border-t-4",
+  ranking: "border-t-4",
+  notTimeline: "boreder-b-4",
+  notRanking: "",
   notSelected: "border-b-4",
 };
 
-export default function Index({ posts }) {
+export const getServerSideProps = withAuthServerSideProps("/api/v1/posts");
+
+export default function Index(props) {
+  const posts = props;
   const [tabIndex, setTabIndex] = useState(0);
   return (
     <>
@@ -35,7 +44,8 @@ export default function Index({ posts }) {
             <Tab
               className={clsx([
                 classes.base,
-                tabIndex === 0 ? classes.selected : classes.notSelected,
+                "saison-blue text-white",
+                tabIndex === 0 ? classes.timeline : classes.notTimeline,
               ])}
             >
               タイムライン
@@ -43,23 +53,27 @@ export default function Index({ posts }) {
             <Tab
               className={clsx([
                 classes.base,
-                tabIndex === 1 ? classes.selected : classes.notSelected,
+                "saison-green text-white",
+                tabIndex === 1 ? classes.selected : classes.notRanking,
               ])}
             >
               ランキング
             </Tab>
           </TabList>
 
-          <TabPanel className="bg-black">
-            <div>
-              <h1>POST一覧</h1>
+          <TabPanel className="saison-blue">
+            <div className="pt-4">
               {posts.data.map((post) => {
                 return <TimelineItem post={post} key={post.id} />;
               })}
             </div>
           </TabPanel>
-          <TabPanel>
-            <h2>Any content 2</h2>
+          <TabPanel className="saison-green">
+            <div className="pt-4">
+              {posts.data.map((post) => {
+                return <TimelineItem post={post} key={post.id} />;
+              })}
+            </div>
           </TabPanel>
         </Tabs>
       </div>
@@ -67,9 +81,9 @@ export default function Index({ posts }) {
   );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch(`https://saison-app-api.herokuapp.com/api/v1/posts`);
-  const posts = await res.json();
-  console.log(posts.data);
-  return { props: { posts } };
-}
+// export async function getServerSideProps() {
+//   const res = await fetch(`https://saison-app-api.herokuapp.com/api/v1/posts`);
+//   const posts = await res.json();
+//   console.log(posts.data);
+//   return { props: { posts } };
+// }

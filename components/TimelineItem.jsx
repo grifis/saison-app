@@ -8,16 +8,16 @@ export default function TimelineItem({ post }) {
   console.log(post);
   return (
     <>
-      <div className="bg-white rounded-lg mb-4 mx-4">
+      <div className="bg-white rounded-lg mt-4 mx-4">
         <Image
           src={post.images[0]?.url}
           className="rounded-lg"
-          alt="a"
+          alt="画像が読み込みませんでした。"
           width={500}
           height={300}
         />
         <div className="px-4 py-4 flex flex-col gap-1">
-          <Link href={`/events/show/${post.eventId}`}>{post.title}</Link>
+          <Link href={`/posts/${post.id}`}>{post.title}</Link>
           <div className="flex items-center gap-1.5">
             <div className="w-7 h-7 shrink-0 bg-gray-100 rounded-full overflow-hidden">
               <Image
