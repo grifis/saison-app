@@ -32,6 +32,7 @@ export default function Create() {
       .then((res) => {
         console.log(res);
         router.push("/");
+        router.refresh();
       });
     console.log(data);
   };
