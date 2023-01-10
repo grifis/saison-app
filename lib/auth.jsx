@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const makeAxiosInstance = () => {
   const axiosInstance = axios.create({
-    baseURL: `http://127.0.0.1:3000/api/v1`,
+    baseURL: `https://saison-app-api.herokuapp.com/api/v1`,
     headers: {
       "content-type": "application/json",
       uid: Cookies.get("uid"),
