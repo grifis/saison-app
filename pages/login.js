@@ -20,7 +20,7 @@ export default function Login() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const axiosInstance = axios.create({
-      baseURL: `http://localhost:3000/api/v1/`,
+      baseURL: `https://saison-app-api.herokuapp.com/api/v1/`,
       headers: {
         "content-type": "application/json",
       },
