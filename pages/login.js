@@ -153,7 +153,7 @@ export default function Login() {
 
             <div class="flex justify-center items-center bg-gray-100 p-4">
               <p class="text-gray-500 text-sm text-center">
-                Don't have an account?{" "}
+                Dont have an account?{" "}
                 <a
                   href="#"
                   class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100"
