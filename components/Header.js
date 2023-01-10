@@ -5,12 +5,14 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { isAuth } from "../lib/auth";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 export default function Header() {
   const [auth, setAuth] = useState("");
+  const authCheck = isAuth();
   useEffect(() => {
-    setAuth(isAuth ? "login" : "notLogin");
-  }, []);
+    setAuth(authCheck ? "login" : "notLogin");
+  }, [authCheck]);
 
   const notLogin = (
     <>
@@ -42,7 +44,7 @@ export default function Header() {
           <Link href="/posts/create">
             <IoMdAddCircleOutline size={25} color={"FB8914"} />
           </Link>
-          <Link href={`/users/`}>
+          <Link href={`/users/${Cookies.get("uid")}`}>
             <CgProfile size={30} color={"FF6900"} />
           </Link>
         </div>

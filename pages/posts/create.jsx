@@ -5,17 +5,19 @@ import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { makeAxiosInstance } from "../../lib/auth";
 
 export default function Create() {
   const { register, handleSubmit } = useForm();
   const [preImage, setPreImage] = useState("");
   const [image, setImage] = useState("");
   const router = useRouter();
+  const axiosInstance = makeAxiosInstance();
 
   const onSubmit = (data) => {
-    axios
+    axiosInstance
       .post(
-        "https://saison-app-api.herokuapp.com/api/v1/posts",
+        "/posts",
         {
           title: data.title,
           body: data.body,
@@ -29,7 +31,7 @@ export default function Create() {
       )
       .then((res) => {
         console.log(res);
-        router.push("/posts");
+        router.push("/");
       });
     console.log(data);
   };

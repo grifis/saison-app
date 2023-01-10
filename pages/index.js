@@ -7,16 +7,15 @@ import "react-tabs/style/react-tabs.css";
 import clsx from "clsx";
 import TimelineItem from "../components/TimelineItem";
 import { withAuthServerSideProps } from "../lib/auth";
-import { blue } from "@mui/material/colors";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const classes = {
   base: "text-gray-600 py-2 px-4 block focus:outline-none font-medium w-1/2",
-  selected: "border-t-4",
-  timeline: "border-t-4",
-  ranking: "border-t-4",
-  notTimeline: "boreder-b-4",
+  selected: "",
+  timeline: "",
+  ranking: "",
+  notTimeline: "",
   notRanking: "",
   notSelected: "border-b-4",
 };
@@ -44,7 +43,7 @@ export default function Index(props) {
             <Tab
               className={clsx([
                 classes.base,
-                "saison-blue text-white",
+                "saison-blue text-white rounded-t-lg",
                 tabIndex === 0 ? classes.timeline : classes.notTimeline,
               ])}
             >
@@ -53,7 +52,7 @@ export default function Index(props) {
             <Tab
               className={clsx([
                 classes.base,
-                "saison-green text-white",
+                "saison-green text-white rounded-t-lg",
                 tabIndex === 1 ? classes.selected : classes.notRanking,
               ])}
             >
