@@ -1,8 +1,46 @@
 import Image from "next/image";
 import Link from "next/link";
+import domain from "../../utils/domain";
+import axios from "axios";
+import { Button } from "@mui/material";
+import { makeAxiosInstance, isAuth, showServerSideProps } from "../../lib/auth";
+import Cookies from "js-cookie";
+import { useState } from "react";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function Post(props) {
-  const post = props.post.data;
+  const authCheck = isAuth();
+  console.log(authCheck);
+  const [isLiked, setIsLiked] = useState(props.isLiked);
+  const [likeCount, setLikeCount] = useState(props.likesCount);
+  const axiosInstance = makeAxiosInstance();
+  const post = props.data;
+  const like = (
+    <button
+      onClick={() => {
+        axiosInstance.delete(`${domain}/api/v1/posts/${post.id}/favorites`);
+        setIsLiked(!isLiked);
+        setLikeCount(likeCount - 1);
+      }}
+    >
+      <FavoriteIcon sx={{ color: "#f56287" }} />
+      {likeCount}
+    </button>
+  );
+  const notLike = (
+    <button
+      onClick={() => {
+        axiosInstance.post(`${domain}/api/v1/posts/${post.id}/favorites`);
+        setIsLiked(!isLiked);
+        setLikeCount(likeCount + 1);
+      }}
+    >
+      <FavoriteBorderIcon />
+      {likeCount}
+    </button>
+  );
+
   return (
     <>
       <div className="bg-white py-6 sm:py-8 lg:py-12">
@@ -33,7 +71,7 @@ export default function Post(props) {
               /> */}
             </div>
             <Link href={`/users/${post.user?.id}`}>
-              <span className="text-xl">ゆーざーねーむ</span>
+              <span className="text-xl">{post.user?.name}</span>
             </Link>
           </div>
           <Image
@@ -51,48 +89,14 @@ export default function Post(props) {
               ))}
             </p>
           </div>
-          <div className="flex gap-2">
-            <div className="w-12 h-12 shrink-0 bg-gray-100 rounded-full overflow-hidden">
-              {/* <img
-                src={post.user.icon_path}
-                loading="lazy"
-                alt="Photo by Brock Wegner"
-                className="w-full h-full object-cover object-center"
-              /> */}
-            </div>
-            <div>
-              <h3 className="font-bold">{post.user?.name}</h3>
-              <p className="font-bold text-xs">{post.user?.one_word}</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <button className="border border-black rounded-md py-4 px-1 font-bold">
-              <Link href={`/users/${post.user?.id}`}>プロフィール</Link>
-            </button>
-            {/* {operatorsId.includes(auth.user?.id) ? joined : unjoined} */}
-          </div>
+          {authCheck && <div>{isLiked ? like : notLike}</div>}
           <div className="flex justify-between">
             <div className="flex gap-2">
               <a
                 href={`https://twitter.com/intent/tweet?text=一緒に${post.title}に参加しよう！詳しくは下のリンクから見てね！&url=https://tornade2022.herokuapp.com/posts/${post.id}&hashtags=Tornado2022`}
                 className="twitter-share-button"
                 data-show-count="false"
-              >
-                {/* <img
-                  src={Twitter}
-                  className="w-10 h-10 border border-black rounded-full p-2"
-                /> */}
-              </a>
-              {/* <img
-                src={LinkIcon}
-                className="w-10 h-10 border border-black rounded-full p-2"
-              /> */}
-              {/* <img src={Label} className="w-10 h-10 p-2" /> */}
-            </div>
-            <div className="flex items-center">
-              <span className="font-bold text-xs">応援する</span>
-              {/* <img src={Gas} /> */}
-              <span>15</span>
+              ></a>
             </div>
           </div>
         </div>
@@ -100,13 +104,20 @@ export default function Post(props) {
     </>
   );
 }
+export const getServerSideProps = showServerSideProps();
 
-export async function getServerSideProps({ params }) {
-  const id = params.post;
-  const res = await fetch(
-    `https://saison-app-api.herokuapp.com/api/v1/posts/${id}`
-  );
-  const post = await res.json();
-  console.log(post);
-  return { props: { post } };
-}
+// export async function getServerSideProps({ context }) {
+//   const { req, params } = context;
+//   const id = params.post;
+//   const res = await fetch(`${domain}/api/v1/posts/${id}`, {
+//     headers: {
+//       "Content-Type": "application/json",
+//       uid: req.cookies["uid"],
+//       client: req.cookies["client"],
+//       "access-token": req.cookies["access-token"],
+//     },
+//   });
+//   const post = await res.json();
+//   console.log(post);
+//   return { props: { post } };
+// }

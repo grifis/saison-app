@@ -17,6 +17,7 @@ export default function TimelineItem({ post }) {
           height={300}
         />
         <div className="px-4 py-4 flex flex-col gap-1">
+          <p>{post.user?.name}</p>
           <Link href={`/posts/${post.id}`}>{post.title}</Link>
           <div className="flex items-center gap-1.5">
             <div className="w-7 h-7 shrink-0 bg-gray-100 rounded-full overflow-hidden">

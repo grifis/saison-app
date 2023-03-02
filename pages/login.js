@@ -10,6 +10,7 @@ import {
 } from "@mui/material/";
 import axios from "axios";
 import Cookies from "js-cookie";
+import domain from "../utils/domain";
 
 export default function Login() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function Login() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const axiosInstance = axios.create({
-      baseURL: `https://saison-app-api.herokuapp.com/api/v1/`,
+      baseURL: `${domain}/api/v1/`,
       headers: {
         "content-type": "application/json",
       },
