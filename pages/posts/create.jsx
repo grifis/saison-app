@@ -30,8 +30,9 @@ export default function Create() {
         }
       )
       .then((res) => {
-        router.push("/");
-        router.refresh();
+        console.log(res);
+        router.push(`/posts/${res.data.data.id}`);
+        // router.reload();
       });
   };
   return (
