@@ -198,48 +198,6 @@ export default function Register() {
           </form>
         </div>
       </div>
-      <Box>
-        <Typography component="h1" variant="h5">
-          新規登録
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit}>
-          <TextField
-            id="email"
-            label="メールアドレス"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            name="password"
-            label="パスワード"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <TextField
-            name="password_confirmation"
-            label="パスワード(確認)"
-            type="password"
-            id="password_confirmation"
-            autoComplete="current-password"
-          />
-          <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
-            新規登録
-          </Button>
-          {isError ? (
-            <Alert
-              onClose={() => {
-                setIsError(false);
-                setErrorMessage("");
-              }}
-              severity="error"
-            >
-              {errorMessage}
-            </Alert>
-          ) : null}
-        </Box>
-      </Box>
     </Container>
   );
 }

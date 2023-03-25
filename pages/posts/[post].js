@@ -8,10 +8,11 @@ import Cookies from "js-cookie";
 import { useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function Post(props) {
   const authCheck = isAuth();
-  console.log(authCheck);
+  // console.log(authCheck);
   const [isLiked, setIsLiked] = useState(props.isLiked);
   const [likeCount, setLikeCount] = useState(props.likesCount);
   const axiosInstance = makeAxiosInstance();
@@ -46,7 +47,7 @@ export default function Post(props) {
       <div className="bg-white py-6 sm:py-8 lg:py-12">
         <div className="relative mb-2">
           <Link href={"/"} className="text-blue-600 absolute">
-            <p>戻る</p>
+            <ArrowBackIcon />
             {/* <img
               src={Arrow}
               className="bg-white p-1 border border-2 border-gray-900 rounded-full"
@@ -62,14 +63,14 @@ export default function Post(props) {
             {post.title}
           </h1>
           <div className="flex items-center gap-2">
-            <div className="w-12 h-12 shrink-0 bg-gray-100 rounded-full overflow-hidden">
-              {/* <img
+            {/* <div className="w-12 h-12 shrink-0 bg-gray-100 rounded-full overflow-hidden">
+              <img
                 src={post.user.icon_path}
                 loading="lazy"
                 alt="Photo by Brock Wegner"
                 className="w-full h-full object-cover object-center"
-              /> */}
-            </div>
+              />
+            </div> */}
             <Link href={`/users/${post.user?.id}`}>
               <span className="text-xl">{post.user?.name}</span>
             </Link>

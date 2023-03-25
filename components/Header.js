@@ -37,14 +37,14 @@ export default function Header() {
   const login = (
     <>
       <form className="flex-col">
-        <div className="block flex gap-3 items-center">
-          <Link href="">
+        <div className="flex gap-3 items-center">
+          {/* <Link href="">
             <BsFillBellFill size={20} color={"FB8914"} />
-          </Link>
+          </Link> */}
           <Link href="/posts/create">
             <IoMdAddCircleOutline size={25} color={"FB8914"} />
           </Link>
-          <Link href={`/users/${Cookies.get("uid")}`}>
+          <Link href={`/users/auth`}>
             <CgProfile size={30} color={"FF6900"} />
           </Link>
         </div>

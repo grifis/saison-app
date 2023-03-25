@@ -20,7 +20,7 @@ export const withAuthServerSideProps = (url) => {
   return async (context) => {
     const { req, res } = context;
 
-    const response = await fetch(`${domain}/${url}`, {
+    const response = await fetch(`${domain}${url}`, {
       headers: {
         "Content-Type": "application/json",
         uid: req.cookies["uid"],

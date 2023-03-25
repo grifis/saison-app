@@ -24,6 +24,7 @@ export const getServerSideProps = withAuthServerSideProps("/api/v1/posts");
 
 export default function Index(props) {
   const posts = props;
+  console.log(posts);
   const [tabIndex, setTabIndex] = useState(0);
   return (
     <>
@@ -69,7 +70,7 @@ export default function Index(props) {
           </TabPanel>
           <TabPanel className="saison-green">
             <div className="pt-4">
-              {posts.data.map((post) => {
+              {posts.post_like_ranks.map((post) => {
                 return <TimelineItem post={post} key={post.id} />;
               })}
             </div>
