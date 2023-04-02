@@ -121,7 +121,7 @@ export default function Create() {
                 type="text"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 {...register("title")}
-                placeholder="例：イナズマロックフェス"
+                placeholder=""
               />
               {/* {errors.title && (
                 <div className="text-red-600">{errors.title}</div>
@@ -132,7 +132,7 @@ export default function Create() {
                 htmlFor="description"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                イベントについて
+                写真の説明
               </label>
               <textarea
                 id="body"
